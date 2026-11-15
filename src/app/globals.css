@@ -1,0 +1,108 @@
+/*
+ * Sistema visual de la tienda.
+ * Los nombres de variables (--background, --primary, ...) siguen la convención
+ * de shadcn/ui por si más adelante se añaden sus componentes.
+ */
+@import "tailwindcss";
+
+@theme inline {
+  --font-sans: var(--font-jost), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-bodoni), "Didot", Georgia, serif;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-gold: var(--gold);
+  --color-blush: var(--blush);
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+:root {
+  --radius: 0.75rem;
+
+  /* Paleta (contrastes verificados según WCAG AA para texto) */
+  --background: #faf5ef;          /* crema */
+  --foreground: #3b2a2c;          /* tinta ciruela: 12.5:1 sobre crema */
+  --card: #ffffff;
+  --card-foreground: #3b2a2c;
+  --popover: #ffffff;
+  --popover-foreground: #3b2a2c;
+  --primary: #a3445e;             /* rosa profundo: 5.9:1 con texto blanco */
+  --primary-foreground: #ffffff;
+  --secondary: #f3d5da;           /* rosa pastel */
+  --secondary-foreground: #3b2a2c;
+  --muted: #f5ece4;
+  --muted-foreground: #75585c;    /* 5.9:1 sobre crema */
+  --accent: #fbeaec;
+  --accent-foreground: #a3445e;
+  --destructive: #b42318;
+  --border: #eadcd3;
+  --input: #e2d2c8;
+  --ring: #a3445e;
+  --gold: #b8955a;                /* solo líneas e íconos, nunca texto */
+  --blush: #f3d5da;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+  h1,
+  h2,
+  h3 {
+    @apply font-display;
+    font-optical-sizing: auto;
+    text-wrap: balance;
+  }
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 3px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  /* Godet: círculo de "polvo compacto" con brillo suave y aro dorado */
+  .swatch {
+    background:
+      radial-gradient(circle at 32% 28%, rgb(255 255 255 / 0.55), transparent 42%),
+      radial-gradient(circle at 70% 75%, rgb(0 0 0 / 0.06), transparent 55%),
+      var(--tint);
+    box-shadow:
+      0 0 0 1px var(--gold),
+      0 0 0 5px var(--card),
+      0 0 0 6px var(--border);
+  }
+}
